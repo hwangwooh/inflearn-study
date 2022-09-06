@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode( of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Account {
 
     @Id
@@ -44,7 +46,7 @@ public class Account {
 
     private boolean studyCredByEmail;
 
-    private boolean studyCreateByWeb;
+    private boolean studyCreatedByWeb;
 
     private boolean studyEnrollmentResultByEmail;
 
@@ -54,4 +56,6 @@ public class Account {
 
     private boolean studyUpdatedByWeb;
 
+    public void generateEmailCheckToken() {this.emailCheckToken = UUID.randomUUID().toString();
+    }
 }
