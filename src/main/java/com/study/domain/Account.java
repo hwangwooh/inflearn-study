@@ -58,4 +58,14 @@ public class Account {
 
     public void generateEmailCheckToken() {this.emailCheckToken = UUID.randomUUID().toString();
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
