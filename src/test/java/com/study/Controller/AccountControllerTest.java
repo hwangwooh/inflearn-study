@@ -72,6 +72,7 @@ class AccountControllerTest {
         System.out.println("account.toString() ==========  "+account.toString());
         assertNotNull(account);
         assertNotEquals(account.getPassword(), "12345678");
+        assertNotNull(account.getEmailCheckToken());
         then(javaMailSender).should().send(any(SimpleMailMessage.class));
 
     }
