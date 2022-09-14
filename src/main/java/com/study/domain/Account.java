@@ -68,4 +68,9 @@ public class Account {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public void completeSigUp() {
+        this.emailVerified = true;
+        joinedAt = LocalDateTime.now();
+    }
 }

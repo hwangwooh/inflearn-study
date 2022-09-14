@@ -42,7 +42,9 @@ public class AccountController {
             return "account/sign-up";
         }
 
-        accountService.processNewAccount(signUpForm);
+        Account account = accountService.processNewAccount(signUpForm);
+        accountService.login(account);
+
 
         return "redirect:/";
     }
@@ -61,9 +63,8 @@ public class AccountController {
             model.addAttribute("error", "wrong.email");
             return view;
         }
-
-        account.setEmailVerified(true);
-        account.setJoinedAt(LocalDateTime.now());
+        accountService.login(account);
+        account.completeSigUp();
         model.addAttribute("numberOfUser", accountRepository.count());
         model.addAttribute("nickname", account.getNickname());
         return view;
