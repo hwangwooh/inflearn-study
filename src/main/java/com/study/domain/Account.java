@@ -32,6 +32,7 @@ public class Account {
     private String emailCheckToken;
 
     private LocalDateTime joinedAt;
+    private LocalDateTime emailCheckTokenGeneratedAt;
 
     private String bio;
 
@@ -56,7 +57,9 @@ public class Account {
 
     private boolean studyUpdatedByWeb;
 
-    public void generateEmailCheckToken() {this.emailCheckToken = UUID.randomUUID().toString();
+    public void generateEmailCheckToken() {
+        this.emailCheckToken = UUID.randomUUID().toString();
+        this.emailCheckTokenGeneratedAt = LocalDateTime.now();
     }
 
     @Override
@@ -72,5 +75,9 @@ public class Account {
     public void completeSigUp() {
         this.emailVerified = true;
         joinedAt = LocalDateTime.now();
+    }
+
+    public boolean canSendConfirmEmail() {
+        return this.emailCheckTokenGeneratedAt.isBefore(LocalDateTime.now().minusHours(1));
     }
 }
