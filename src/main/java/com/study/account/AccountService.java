@@ -49,7 +49,6 @@ public class AccountService implements UserDetailsService {
         javaMailSender.send(mailMessage);
     }
 
-    @Transactional
     public Account processNewAccount(SignUpForm signUpForm) {
 
         Account newAccount = saveNewAccount(signUpForm);

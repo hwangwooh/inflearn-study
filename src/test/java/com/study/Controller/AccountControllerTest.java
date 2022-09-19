@@ -122,5 +122,24 @@ class AccountControllerTest {
                 .andExpect(view().name("account/checked-Email"))
                 .andExpect(authenticated());
     }
+    @DisplayName("프로필 테스트")
+    @Test
+    void viewProfile() throws Exception {
+
+        SignUpForm signUpForm = new SignUpForm();
+        signUpForm.setEmail("test@email.com");
+        signUpForm.setNickname("test");
+        signUpForm.setPassword("12345567");
+        accountService.processNewAccount(signUpForm);
+
+        Account byEmail = accountRepository.findByEmail(signUpForm.getEmail());
+
+        mockMvc.perform(get("/profile/{nickname}", byEmail.getNickname())
+                                .param("nickname", byEmail.getEmailCheckToken())
+                )
+                .andExpect(status().isOk())
+                .andExpect(view().name("account/profile"));
+
+    }
 
 }

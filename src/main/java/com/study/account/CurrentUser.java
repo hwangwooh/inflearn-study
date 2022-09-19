@@ -1,4 +1,4 @@
-package com.study.main;
+package com.study.account;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
